@@ -1,4 +1,4 @@
-@extends('dashboard.staff.layouts.app')
+ @extends('dashboard.staff.layouts.app')
 @section('content')
 <style>
 
@@ -355,304 +355,348 @@ select.form-kkn{
 
 </style>
 
-<div class="row gy-4">
+<style>
+.kkn-header{
+    min-height:130px;
+    padding:32px;
+    display:flex;
+    flex-direction:column;
+    justify-content:flex-end;
+    border-radius:20px 20px 0 0;
 
-    {{-- LEFT --}}
-    <div class="col-lg-8">
+    background:
+        linear-gradient(
+            135deg,
+            #5f1904 0%,
+            #e93d3d 100%
+        );
 
-        {{-- Welcome Card --}}
-        <div class="card border-0 shadow-sm radius-12 bg-primary-50 mb-4">
-            <div class="card-body p-24">
-                <div class="d-flex align-items-center justify-content-between flex-wrap gap-3">
-                    <div class="card border-0 shadow-sm radius-12 overflow-hidden">
+    box-shadow:
+        0 8px 24px rgba(0,0,0,.08);
+}
 
-    {{-- Header --}}
-    <div class="kkn-header">
-        <h2 class="kkn-title">
-            Formulir Pendaftaran KKN
-        </h2>
+.kkn-title{
+    margin:0 0 6px 0;
+    color:#fff;
+    font-size:28px;
+    font-weight:700;
+}
 
-        <p class="kkn-subtitle">
-            Lengkapi data diri anda dengan benar
-        </p>
+.kkn-subtitle{
+    margin:0;
+    color:rgba(255,255,255,.85);
+    font-size:13px;
+}
+
+.form-label-custom{
+    display:block;
+    margin-bottom:8px;
+    font-size:11px;
+    font-weight:700;
+    text-transform:uppercase;
+    letter-spacing:1px;
+    color:#94a3b8;
+}
+
+.form-kkn{
+    height:52px;
+    border:1px solid #e2e8f0;
+    border-radius:14px;
+    background:#f8fafc;
+    padding:0 18px;
+    width:100%;
+}
+
+.upload-box{
+    min-height:160px;
+    border:2px dashed #e2e8f0;
+    border-radius:20px;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+    gap:10px;
+    cursor:pointer;
+    transition:.3s;
+}
+
+.upload-box:hover{
+    background:#fff7ed;
+    border-color:#ef4444;
+}
+
+.btn-kkn-submit{
+    min-width:140px;
+    height:48px;
+    border:none;
+    border-radius:12px;
+    background:#6d1515;
+    color:white;
+    font-size:13px;
+    font-weight:700;
+    text-transform:uppercase;
+}
+
+.btn-kkn-cancel{
+    min-width:120px;
+    height:48px;
+    border:none;
+    border-radius:12px;
+    background:#e2e8f0;
+    color:#334155;
+}
+</style>
+
+<x-app-layout>
+
+<div x-data="{ open:false }" class="flex h-screen bg-slate-100">
+
+```
+@include('components.sidebar')
+
+<main class="flex-1 overflow-y-auto">
+
+    @include('components.header')
+
+    <div class="py-8">
+
+        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+
+            <nav class="flex items-center text-sm text-gray-600 space-x-2 mb-6">
+                <a href="{{ route('dashboard') }}" class="hover:text-red-600">
+                    Home
+                </a>
+
+                <span>›</span>
+
+                <span class="text-gray-500">
+                    Verification
+                </span>
+            </nav>
+
+            <div class="bg-white rounded-3xl overflow-hidden shadow-sm">
+
+                <div class="kkn-header">
+
+                    <h2 class="kkn-title">
+                        Verifikasi Laporan
+                    </h2>
+
+                    <p class="kkn-subtitle">
+                        Kelola dan verifikasi laporan mahasiswa KKN
+                    </p>
+
+                </div>
+
+                <div class="p-6">
+
+                    <div class="flex justify-between items-center mb-6">
+
+                        <div>
+
+                            <h3 class="text-lg font-bold text-slate-800">
+                                Data Laporan
+                            </h3>
+
+                            <p class="text-sm text-slate-500">
+                                Daftar laporan yang telah diupload mahasiswa
+                            </p>
+
+                        </div>
+
+                        <button
+                            onclick="openModal()"
+                            class="btn-kkn-submit">
+
+                            + Tambah Laporan
+
+                        </button>
+
+                    </div>
+
+                    <div class="overflow-x-auto">
+
+                        <table
+                            id="verificationTable"
+                            class="w-full border border-slate-200">
+
+                            <thead class="bg-slate-100">
+
+                                <tr>
+
+                                    <th class="p-3 border">
+                                        Nama File
+                                    </th>
+
+                                    <th class="p-3 border">
+                                        Tanggal Upload
+                                    </th>
+
+                                    <th class="p-3 border">
+                                        Jenis
+                                    </th>
+
+                                    <th class="p-3 border">
+                                        Status
+                                    </th>
+
+                                    <th class="p-3 border">
+                                        Catatan
+                                    </th>
+
+                                    <th class="p-3 border">
+                                        Aksi
+                                    </th>
+
+                                </tr>
+
+                            </thead>
+
+                        </table>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
     </div>
 
-
-    {{-- Form --}}
-    <form action="{{ route('pendaftaran.store')}}" method="POST" enctype="multipart/form-data">
-
-        @csrf
-
-        <div class="card-body p-4">
-
-            <div class="row g-4">
-
-
-                {{-- Nama --}}
-                <div class="col-md-6 mb-4">
-                    <label class="form-label-custom">
-                        Nama Mahasiswa
-                    </label>
-
-                    <input
-                        type="text"
-                        name="nama_lengkap"
-                        class="form-control form-kkn"
-                        placeholder="Masukkan nama">
-                </div>
-
-
-                {{-- NIM --}}
-                <div class="col-md-6">
-                    <label class="form-label-custom">
-                        NIM
-                    </label>
-
-                    <input
-                        type="text"
-                        name="nim"
-                        class="form-control form-kkn"
-                        placeholder="Masukkan NIM">
-                </div>
-
-
-                {{-- JK --}}
-                <div class="col-md-6 mb-4">
-                    <label class="form-label-custom">
-                        Jenis Kelamin
-                    </label>
-
-                    <select
-                        name="jenis_kelamin"
-                        class="form-select form-kkn">
-
-                        <option value="">
-                            Pilih Jenis Kelamin
-                        </option>
-
-                        <option value="L">
-                            Laki-laki
-                        </option>
-
-                        <option value="P">
-                            Perempuan
-                        </option>
-
-                    </select>
-                </div>
-
-                {{-- Tempat Lahir --}}
-                <div class="col-md-6 mb-4">
-                    <label class="form-label-custom">
-                        Tempat Lahir
-                    </label>
-
-                    <input
-                        type="text"
-                        name="tempat_lahir"
-                        class="form-control form-kkn"
-                        placeholder="Masukkan tempat lahir">
-                </div>
-
-                {{-- Tanggal Lahir --}}
-                <div class="col-md-6 mb-4">
-                    <label class="form-label-custom">
-                        Tanggal Lahir
-                    </label>
-
-                    <input
-                        type="date"
-                        name="tanggal_lahir"
-                        class="form-control form-kkn">
-                </div>
-
-                {{-- HP --}}
-                <div class="col-md-6 mb-4">
-                    <label class="form-label-custom">
-                        Nomor Handphone
-                    </label>
-
-                    <input
-                        type="text"
-                        name="no_hp"
-                        class="form-control form-kkn"
-                        placeholder="08...">
-                </div>
-
-                {{-- Alamat --}}
-                <div class="col-md-6 mb-4">
-                    <label class="form-label-custom">
-                        NIK
-                    </label>
-
-                    <input
-                        type="text"
-                        name="nik"
-                        class="form-control form-kkn"
-                        placeholder="Masukkan NIK">
-                </div>
-
-                {{-- Alamat --}}
-                <div class="col-12 mb-4">
-                    <label class="form-label-custom">
-                        Alamat
-                    </label>
-
-                    <textarea
-                        name="alamat"
-                        rows="4"
-                        class="form-control form-kkn"
-                        placeholder="Masukkan alamat lengkap"></textarea>
-                </div>
-
-
-
-
-                {{-- Fakultas --}}
-                {{-- <div class="col-md-6">
-                    <label class="form-label-custom">
-                        Fakultas
-                    </label>
-
-                    <select
-                        name="fakultas"
-                        class="form-select form-kkn">
-
-                        <option value="">
-                            Pilih Fakultas
-                        </option>
-
-                    </select>
-                </div> --}}
-
-
-                {{-- Prodi --}}
-                {{-- <div class="col-md-6 mb-4">
-                    <label class="form-label-custom">
-                        Prodi
-                    </label>
-
-                    <select
-                        name="prodi"
-                        class="form-select form-kkn">
-
-                        <option value="">
-                            Pilih Prodi
-                        </option>
-
-                    </select>
-                </div> --}}
-
-
-                {{-- Jenis KKN --}}
-                {{-- <div class="col-12 mb-4">
-                    <label class="form-label-custom">
-                        Jenis KKN
-                    </label>
-
-                    <select
-                        name="jenis_kkn"
-                        class="form-select form-kkn">
-
-                        <option value="Reguler">
-                            Reguler
-                        </option>
-
-                        <option value="MBKM">
-                            MBKM
-                        </option>
-
-                    </select>
-                </div> --}}
-
-
-                {{-- Upload --}}
-                {{-- <div class="col-md-6">
-
-                    <label
-                        for="file1"
-                        class="upload-box">
-
-                        <input
-                            type="file"
-                            name="surat_pernyataan"
-                            id="file1"
-                            hidden>
-
-                        <iconify-icon
-                            icon="ph:file-pdf"
-                            width="40">
-                        </iconify-icon>
-
-                        <span>
-                            Surat Pernyataan (PDF)
-                        </span>
-
-                    </label>
-
-                </div> --}}
-
-
-
-                {{-- <div class="col-md-6">
-
-                    <label
-                        for="file2"
-                        class="upload-box">
-
-                        <input
-                            type="file"
-                            name="khs"
-                            id="file2"
-                            hidden>
-
-                        <iconify-icon
-                            icon="ph:file-doc"
-                            width="40">
-                        </iconify-icon>
-
-                        <span>
-                            KHS Terakhir (PDF)
-                        </span>
-
-                    </label>
-
-                </div> --}}
-
-            </div>
-
-        </div>
-
-
-        {{-- Footer --}}
-        <div class="card-footer bg-white border-0 p-4">
-
-            <div class="d-flex justify-content-end gap-3">
-
-                <button
-                    type="button"
-                    class="btn-kkn-cancel mr-3">
-
-                    Cancel
-
-                </button>
-
-
-                <button
-                    type="submit"
-                    class="btn-kkn-submit">
-
-                    Submit Data
-
-                </button>
-
-            </div>
-
-        </div>
-
-    </form>
+</main>
+```
 
 </div>
+
+<div id="uploadModal"
+     class="fixed inset-0 z-50 hidden">
+
+```
+<div class="flex items-center justify-center min-h-screen px-4">
+
+    <div class="fixed inset-0 bg-black bg-opacity-50"></div>
+
+    <div class="bg-white rounded-3xl overflow-hidden shadow-xl sm:max-w-lg sm:w-full z-50">
+
+        <div class="kkn-header">
+
+            <h2 class="kkn-title">
+                Upload Laporan Baru
+            </h2>
+
+            <p class="kkn-subtitle">
+                Lengkapi data laporan dengan benar
+            </p>
+
+        </div>
+
+        <form id="uploadForm" enctype="multipart/form-data">
+
+            @csrf
+
+            <div class="p-6">
+
+                <div class="mb-5">
+
+                    <label class="form-label-custom">
+                        Jenis Laporan
+                    </label>
+
+                    <select
+                        name="jenis_laporan"
+                        required
+                        class="form-kkn">
+
+                        <option value="Laporan Mingguan">
+                            Laporan Mingguan
+                        </option>
+
+                        <option value="Laporan Akhir">
+                            Laporan Akhir
+                        </option>
+
+                        <option value="Program Kerja">
+                            Program Kerja
+                        </option>
+
+                    </select>
+
+                </div>
+
+                <div>
+
+                    <label
+                        for="file_laporan"
+                        class="upload-box">
+
+                        <svg xmlns="http://www.w3.org/2000/svg"
+                             width="50"
+                             height="50"
+                             fill="none"
+                             stroke="#94a3b8"
+                             viewBox="0 0 24 24">
+
+                            <path stroke-linecap="round"
+                                  stroke-linejoin="round"
+                                  stroke-width="2"
+                                  d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"/>
+
+                        </svg>
+
+                        <span>
+                            Upload File PDF / JPG / PNG
+                        </span>
+
+                        <input
+                            hidden
+                            id="file_laporan"
+                            type="file"
+                            name="file_laporan"
+                            required>
+
+                    </label>
+
+                </div>
+
+            </div>
+
+            <div class="bg-white p-6">
+
+                <div class="flex justify-end gap-3">
+
+                    <button
+                        type="button"
+                        onclick="closeModal()"
+                        class="btn-kkn-cancel">
+
+                        Cancel
+
+                    </button>
+
+                    <button
+                        type="submit"
+                        class="btn-kkn-submit">
+
+                        Submit Data
+
+                    </button>
+
+                </div>
+
+            </div>
+
+        </form>
+
+    </div>
+
+</div>
+```
+
+</div>
+
+</x-app-layout>
+
                 </div>
             </div>
         </div>
