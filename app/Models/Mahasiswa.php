@@ -14,8 +14,6 @@ class Mahasiswa extends Model
 
         'user_id',
 
-        'nik',
-
         'nim',
 
         'nama_lengkap',

@@ -13,7 +13,7 @@
 <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
 
             <!-- Sidebar - Brand -->
-            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
+            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="{{ route('mahasiswa.index') }}">
                 {{-- <div class="sidebar-brand-icon rotate-n-15">
                     <i class="fas fa-laugh-wink"></i>
                 </div> --}}
@@ -40,14 +40,14 @@
 
             <!-- Nav Item - Pages Collapse Menu -->
             <li class="nav-item">
-                <a class="nav-link" href="{{ route('pendaftaran.index') }}">
+                <a class="nav-link" href="{{ route('mahasiswa.pendaftaran.index') }}">
                     <i class="fas fa-fw fa-folder"></i>
                     <span>Pendaftaran KKN</span>
                 </a>
             </li>
 
             <li class="nav-item">
-                <a class="nav-link" href="#">
+                <a class="nav-link" href="{{ route('mahasiswa.laporan.index') }}">
                     <i class="fas fa-fw fa-folder"></i>
                     <span>Laporan</span>
                 </a>
@@ -65,7 +65,7 @@
 
             <!-- Sidebar Toggler (Sidebar) -->
             <div class="text-center d-none d-md-inline">
-                <button class="rounded-circle border-0" id="sidebarToggle"></button>
+                <button type="button" class="rounded-circle border-0" id="sidebarToggle"></button>
             </div>
 
             <!-- Sidebar Message -->
