@@ -34,9 +34,9 @@
         <div class="col-lg-2 col-md-3 footer-links">
           <h4>Useful Links</h4>
           <ul>
-            <li><i class="bi bi-chevron-right"></i> <a href="#">Home</a></li>
-            <li><i class="bi bi-chevron-right"></i> <a href="#">About us</a></li>
-            <li><i class="bi bi-chevron-right"></i> <a href="#">Services</a></li>
+            <li><i class="bi bi-chevron-right"></i> <a href="#">Beranda</a></li>
+            <li><i class="bi bi-chevron-right"></i> <a href="#">Tentang</a></li>
+            <li><i class="bi bi-chevron-right"></i> <a href="#">Layanan</a></li>
             <li><i class="bi bi-chevron-right"></i> <a href="#">Terms of service</a></li>
           </ul>
         </div>
@@ -44,10 +44,10 @@
         <div class="col-lg-2 col-md-3 footer-links">
           <h4>Our Services</h4>
           <ul>
-            <li><i class="bi bi-chevron-right"></i> <a href="#">Web Design</a></li>
-            <li><i class="bi bi-chevron-right"></i> <a href="#">Web Development</a></li>
-            <li><i class="bi bi-chevron-right"></i> <a href="#">Product Management</a></li>
-            <li><i class="bi bi-chevron-right"></i> <a href="#">Marketing</a></li>
+            <li><i class="bi bi-chevron-right"></i> <a href="#">Persyaratan Peserta</a></li>
+            <li><i class="bi bi-chevron-right"></i> <a href="#">Alur Pelaksanaan</a></li>
+            <li><i class="bi bi-chevron-right"></i> <a href="#">Pelaporan & Penilaian</a></li>
+            <li><i class="bi bi-chevron-right"></i> <a href="#">Fakta Integritas</a></li>
           </ul>
         </div>
 

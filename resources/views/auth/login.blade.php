@@ -207,7 +207,7 @@
                         @if (Route::has('password.request'))
                             <a class="small text-muted" href="{{ route('password.request') }}">Lupa Password?</a>
                         @endif
-                        <a class="small text-muted" href="register">Daftar Akun</a>
+                        <a class="small text-muted" href="{{ route('register') }}">Daftar Akun</a>
                     </div>
 
                 </form>

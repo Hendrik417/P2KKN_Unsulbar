@@ -1,6 +1,8 @@
 <?php
 
 use App\Http\Controllers\Dashboard\Mahasiswa\HomeController as DMHomeController;
+use App\Http\Controllers\Dashboard\Mahasiswa\PendaftaranController as DMPendaftaranController;
+use App\Http\Controllers\Dashboard\Mahasiswa\LaporanController as DMLaporanController;
 use App\Http\Controllers\Dashboard\Staff\PendaftaranController;
 use App\Http\Controllers\Dashboard\Dosen\HomeController as DDHomeController;
 use App\Http\Controllers\Dashboard\Staff\HomeController as DSHomeController;
@@ -46,13 +48,24 @@ Route::prefix('mahasiswa')->as('mahasiswa.')->middleware(['auth','role:mahasiswa
         /* ################################################## */
         /* # End Route Home                                 # */
         /* ################################################## */
-    });
 
-        /* route pendaftaran */
-                // Route::resource('pendaftaran', PendaftaranController::class)
-                //     ->parameter('pendaftaran', 'id')
-                //     ->only(['index', 'show', 'store', 'update', 'destroy']);
-        /* end route pendaftaran */
+        Route::controller(DMPendaftaranController::class)->group(function () {
+            Route::get('/pendaftaran', 'index')->name('pendaftaran.index');
+        });
+
+        /* ################################################## */
+        /* # Route Laporan                                  # */
+        /* ################################################## */
+        Route::controller(DMLaporanController::class)->group(function () {
+            Route::get('/laporan', 'index')->name('laporan.index');
+            Route::post('/laporan', 'store')->name('laporan.store');
+            Route::get('/laporan/{laporan}/download', 'download')->name('laporan.download');
+            Route::delete('/laporan/{laporan}', 'destroy')->name('laporan.destroy');
+        });
+        /* ################################################## */
+        /* # End Route Laporan                              # */
+        /* ################################################## */
+    });
 /*
 |--------------------------------------------------------------------------
 | End Route Mahasiswa

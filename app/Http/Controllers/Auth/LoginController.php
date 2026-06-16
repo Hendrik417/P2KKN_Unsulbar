@@ -75,6 +75,8 @@ class LoginController extends Controller
         */
         Auth::logout();
 
-        return redirect('/login');
+        return redirect('/login')->withErrors([
+            'email' => 'Akun belum memiliki akses. Silakan hubungi admin.',
+        ]);
     }
 }

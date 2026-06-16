@@ -40,7 +40,7 @@
                 <div class="d-flex align-items-center justify-content-between flex-wrap gap-3">
                     <div>
                         <h4 class="mb-8 fw-bold text-primary-600">
-                            Selamat Datang di Menu Mahasiswa, Dian!
+                            Selamat Datang di Menu Mahasiswa, {{ auth()->user()->name }}!
                         </h4>
 
                         <p class="mb-0 text-secondary-light">
